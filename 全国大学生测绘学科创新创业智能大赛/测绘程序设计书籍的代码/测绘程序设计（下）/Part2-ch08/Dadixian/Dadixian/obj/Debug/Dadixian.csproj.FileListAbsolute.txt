@@ -1,0 +1,10 @@
+D:\Csharp代码库\下册\Part2-ch08\Dadixian\Dadixian\bin\Debug\Dadixian.exe.config
+D:\Csharp代码库\下册\Part2-ch08\Dadixian\Dadixian\bin\Debug\Dadixian.exe
+D:\Csharp代码库\下册\Part2-ch08\Dadixian\Dadixian\bin\Debug\Dadixian.pdb
+D:\Csharp代码库\下册\Part2-ch08\Dadixian\Dadixian\obj\Debug\Dadixian.csprojAssemblyReference.cache
+D:\Csharp代码库\下册\Part2-ch08\Dadixian\Dadixian\obj\Debug\Dadixian.Form1.resources
+D:\Csharp代码库\下册\Part2-ch08\Dadixian\Dadixian\obj\Debug\Dadixian.Properties.Resources.resources
+D:\Csharp代码库\下册\Part2-ch08\Dadixian\Dadixian\obj\Debug\Dadixian.csproj.GenerateResource.cache
+D:\Csharp代码库\下册\Part2-ch08\Dadixian\Dadixian\obj\Debug\Dadixian.csproj.CoreCompileInputs.cache
+D:\Csharp代码库\下册\Part2-ch08\Dadixian\Dadixian\obj\Debug\Dadixian.exe
+D:\Csharp代码库\下册\Part2-ch08\Dadixian\Dadixian\obj\Debug\Dadixian.pdb

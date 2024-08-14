@@ -1,0 +1,10 @@
+D:\Csharp代码库\测绘程序设计\Chap7_lono\lono\bin\Debug\Chap7_lono.exe.config
+D:\Csharp代码库\测绘程序设计\Chap7_lono\lono\bin\Debug\Chap7_lono.exe
+D:\Csharp代码库\测绘程序设计\Chap7_lono\lono\bin\Debug\Chap7_lono.pdb
+D:\Csharp代码库\测绘程序设计\Chap7_lono\lono\obj\Debug\lono.Form1.resources
+D:\Csharp代码库\测绘程序设计\Chap7_lono\lono\obj\Debug\lono.Properties.Resources.resources
+D:\Csharp代码库\测绘程序设计\Chap7_lono\lono\obj\Debug\Chap7_lono.csproj.GenerateResource.cache
+D:\Csharp代码库\测绘程序设计\Chap7_lono\lono\obj\Debug\Chap7_lono.csproj.CoreCompileInputs.cache
+D:\Csharp代码库\测绘程序设计\Chap7_lono\lono\obj\Debug\Chap7_lono.exe
+D:\Csharp代码库\测绘程序设计\Chap7_lono\lono\obj\Debug\Chap7_lono.pdb
+D:\Csharp代码库\测绘程序设计\Chap7_lono\lono\obj\Debug\Chap7_lono.csprojAssemblyReference.cache

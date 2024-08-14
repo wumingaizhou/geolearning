@@ -1,0 +1,10 @@
+C:\Users\吴\Desktop\测绘技能大赛\选题预测\6.曲线拟合\代码实现\WuDian\WuDian\bin\Debug\WuDian.exe.config
+C:\Users\吴\Desktop\测绘技能大赛\选题预测\6.曲线拟合\代码实现\WuDian\WuDian\bin\Debug\WuDian.exe
+C:\Users\吴\Desktop\测绘技能大赛\选题预测\6.曲线拟合\代码实现\WuDian\WuDian\bin\Debug\WuDian.pdb
+C:\Users\吴\Desktop\测绘技能大赛\选题预测\6.曲线拟合\代码实现\WuDian\WuDian\obj\Debug\WuDian.csprojAssemblyReference.cache
+C:\Users\吴\Desktop\测绘技能大赛\选题预测\6.曲线拟合\代码实现\WuDian\WuDian\obj\Debug\WuDian.Form1.resources
+C:\Users\吴\Desktop\测绘技能大赛\选题预测\6.曲线拟合\代码实现\WuDian\WuDian\obj\Debug\WuDian.Properties.Resources.resources
+C:\Users\吴\Desktop\测绘技能大赛\选题预测\6.曲线拟合\代码实现\WuDian\WuDian\obj\Debug\WuDian.csproj.GenerateResource.cache
+C:\Users\吴\Desktop\测绘技能大赛\选题预测\6.曲线拟合\代码实现\WuDian\WuDian\obj\Debug\WuDian.csproj.CoreCompileInputs.cache
+C:\Users\吴\Desktop\测绘技能大赛\选题预测\6.曲线拟合\代码实现\WuDian\WuDian\obj\Debug\WuDian.exe
+C:\Users\吴\Desktop\测绘技能大赛\选题预测\6.曲线拟合\代码实现\WuDian\WuDian\obj\Debug\WuDian.pdb

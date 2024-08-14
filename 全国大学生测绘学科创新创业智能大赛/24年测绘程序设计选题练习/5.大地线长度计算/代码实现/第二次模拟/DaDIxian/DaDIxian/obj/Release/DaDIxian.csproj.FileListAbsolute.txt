@@ -1,0 +1,10 @@
+C:\Users\吴\Desktop\第二次模拟\DaDIxian\DaDIxian\bin\Release\DaDIxian.exe.config
+C:\Users\吴\Desktop\第二次模拟\DaDIxian\DaDIxian\bin\Release\DaDIxian.exe
+C:\Users\吴\Desktop\第二次模拟\DaDIxian\DaDIxian\bin\Release\DaDIxian.pdb
+C:\Users\吴\Desktop\第二次模拟\DaDIxian\DaDIxian\obj\Release\DaDIxian.csprojAssemblyReference.cache
+C:\Users\吴\Desktop\第二次模拟\DaDIxian\DaDIxian\obj\Release\DaDIxian.Form1.resources
+C:\Users\吴\Desktop\第二次模拟\DaDIxian\DaDIxian\obj\Release\DaDIxian.Properties.Resources.resources
+C:\Users\吴\Desktop\第二次模拟\DaDIxian\DaDIxian\obj\Release\DaDIxian.csproj.GenerateResource.cache
+C:\Users\吴\Desktop\第二次模拟\DaDIxian\DaDIxian\obj\Release\DaDIxian.csproj.CoreCompileInputs.cache
+C:\Users\吴\Desktop\第二次模拟\DaDIxian\DaDIxian\obj\Release\DaDIxian.exe
+C:\Users\吴\Desktop\第二次模拟\DaDIxian\DaDIxian\obj\Release\DaDIxian.pdb

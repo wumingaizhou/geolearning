@@ -1,0 +1,10 @@
+D:\Csharp代码库\测绘程序设计\Chap6_CalArea\CalArea\bin\Debug\Chap6_CalRrea.exe.config
+D:\Csharp代码库\测绘程序设计\Chap6_CalArea\CalArea\bin\Debug\Chap6_CalRrea.exe
+D:\Csharp代码库\测绘程序设计\Chap6_CalArea\CalArea\bin\Debug\Chap6_CalRrea.pdb
+D:\Csharp代码库\测绘程序设计\Chap6_CalArea\CalArea\obj\Debug\CalArea.Form1.resources
+D:\Csharp代码库\测绘程序设计\Chap6_CalArea\CalArea\obj\Debug\Chap6_CalRrea.Properties.Resources.resources
+D:\Csharp代码库\测绘程序设计\Chap6_CalArea\CalArea\obj\Debug\Chap6_CalArea.csproj.GenerateResource.cache
+D:\Csharp代码库\测绘程序设计\Chap6_CalArea\CalArea\obj\Debug\Chap6_CalArea.csproj.CoreCompileInputs.cache
+D:\Csharp代码库\测绘程序设计\Chap6_CalArea\CalArea\obj\Debug\Chap6_CalRrea.exe
+D:\Csharp代码库\测绘程序设计\Chap6_CalArea\CalArea\obj\Debug\Chap6_CalRrea.pdb
+D:\Csharp代码库\测绘程序设计\Chap6_CalArea\CalArea\obj\Debug\Chap6_CalArea.csprojAssemblyReference.cache

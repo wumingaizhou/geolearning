@@ -1,0 +1,9 @@
+C:\Users\吴\Desktop\KongJianTanSuo\KongJianTanSuo\bin\Release\KongJianTanSuo.exe.config
+C:\Users\吴\Desktop\KongJianTanSuo\KongJianTanSuo\bin\Release\KongJianTanSuo.exe
+C:\Users\吴\Desktop\KongJianTanSuo\KongJianTanSuo\bin\Release\KongJianTanSuo.pdb
+C:\Users\吴\Desktop\KongJianTanSuo\KongJianTanSuo\obj\Release\KongJianTanSuo.Form1.resources
+C:\Users\吴\Desktop\KongJianTanSuo\KongJianTanSuo\obj\Release\KongJianTanSuo.Properties.Resources.resources
+C:\Users\吴\Desktop\KongJianTanSuo\KongJianTanSuo\obj\Release\KongJianTanSuo.csproj.GenerateResource.cache
+C:\Users\吴\Desktop\KongJianTanSuo\KongJianTanSuo\obj\Release\KongJianTanSuo.csproj.CoreCompileInputs.cache
+C:\Users\吴\Desktop\KongJianTanSuo\KongJianTanSuo\obj\Release\KongJianTanSuo.exe
+C:\Users\吴\Desktop\KongJianTanSuo\KongJianTanSuo\obj\Release\KongJianTanSuo.pdb

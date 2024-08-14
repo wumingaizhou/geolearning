@@ -1,0 +1,10 @@
+D:\Csharp代码库\下册\Part2-ch02\SpaceFowardIntersection\SpaceFowardIntersection\bin\Debug\SpaceFowardIntersection.exe.config
+D:\Csharp代码库\下册\Part2-ch02\SpaceFowardIntersection\SpaceFowardIntersection\bin\Debug\SpaceFowardIntersection.exe
+D:\Csharp代码库\下册\Part2-ch02\SpaceFowardIntersection\SpaceFowardIntersection\bin\Debug\SpaceFowardIntersection.pdb
+D:\Csharp代码库\下册\Part2-ch02\SpaceFowardIntersection\SpaceFowardIntersection\obj\Debug\SpaceFowardIntersection.csprojAssemblyReference.cache
+D:\Csharp代码库\下册\Part2-ch02\SpaceFowardIntersection\SpaceFowardIntersection\obj\Debug\SpaceFowardIntersection.Form1.resources
+D:\Csharp代码库\下册\Part2-ch02\SpaceFowardIntersection\SpaceFowardIntersection\obj\Debug\SpaceFowardIntersection.Properties.Resources.resources
+D:\Csharp代码库\下册\Part2-ch02\SpaceFowardIntersection\SpaceFowardIntersection\obj\Debug\SpaceFowardIntersection.csproj.GenerateResource.cache
+D:\Csharp代码库\下册\Part2-ch02\SpaceFowardIntersection\SpaceFowardIntersection\obj\Debug\SpaceFowardIntersection.csproj.CoreCompileInputs.cache
+D:\Csharp代码库\下册\Part2-ch02\SpaceFowardIntersection\SpaceFowardIntersection\obj\Debug\SpaceFowardIntersection.exe
+D:\Csharp代码库\下册\Part2-ch02\SpaceFowardIntersection\SpaceFowardIntersection\obj\Debug\SpaceFowardIntersection.pdb

@@ -1,0 +1,10 @@
+C:\Users\吴\Desktop\测绘技能大赛\选题预测\2.遥感图像空间前方交会计算\代码实现\KongJianJiaoHui\KongJianJiaoHui\bin\Debug\KongJianJiaoHui.exe.config
+C:\Users\吴\Desktop\测绘技能大赛\选题预测\2.遥感图像空间前方交会计算\代码实现\KongJianJiaoHui\KongJianJiaoHui\bin\Debug\KongJianJiaoHui.exe
+C:\Users\吴\Desktop\测绘技能大赛\选题预测\2.遥感图像空间前方交会计算\代码实现\KongJianJiaoHui\KongJianJiaoHui\bin\Debug\KongJianJiaoHui.pdb
+C:\Users\吴\Desktop\测绘技能大赛\选题预测\2.遥感图像空间前方交会计算\代码实现\KongJianJiaoHui\KongJianJiaoHui\obj\Debug\KongJianJiaoHui.csprojAssemblyReference.cache
+C:\Users\吴\Desktop\测绘技能大赛\选题预测\2.遥感图像空间前方交会计算\代码实现\KongJianJiaoHui\KongJianJiaoHui\obj\Debug\KongJianJiaoHui.Form1.resources
+C:\Users\吴\Desktop\测绘技能大赛\选题预测\2.遥感图像空间前方交会计算\代码实现\KongJianJiaoHui\KongJianJiaoHui\obj\Debug\KongJianJiaoHui.Properties.Resources.resources
+C:\Users\吴\Desktop\测绘技能大赛\选题预测\2.遥感图像空间前方交会计算\代码实现\KongJianJiaoHui\KongJianJiaoHui\obj\Debug\KongJianJiaoHui.csproj.GenerateResource.cache
+C:\Users\吴\Desktop\测绘技能大赛\选题预测\2.遥感图像空间前方交会计算\代码实现\KongJianJiaoHui\KongJianJiaoHui\obj\Debug\KongJianJiaoHui.csproj.CoreCompileInputs.cache
+C:\Users\吴\Desktop\测绘技能大赛\选题预测\2.遥感图像空间前方交会计算\代码实现\KongJianJiaoHui\KongJianJiaoHui\obj\Debug\KongJianJiaoHui.exe
+C:\Users\吴\Desktop\测绘技能大赛\选题预测\2.遥感图像空间前方交会计算\代码实现\KongJianJiaoHui\KongJianJiaoHui\obj\Debug\KongJianJiaoHui.pdb

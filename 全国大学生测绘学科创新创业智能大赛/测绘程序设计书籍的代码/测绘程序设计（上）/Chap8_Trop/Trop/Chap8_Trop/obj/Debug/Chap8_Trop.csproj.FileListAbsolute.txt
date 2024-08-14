@@ -1,0 +1,10 @@
+D:\Csharp代码库\测绘程序设计\Chap8_Trop\Trop\Chap8_Trop\bin\Debug\Chap8_Trop.exe.config
+D:\Csharp代码库\测绘程序设计\Chap8_Trop\Trop\Chap8_Trop\bin\Debug\Chap8_Trop.exe
+D:\Csharp代码库\测绘程序设计\Chap8_Trop\Trop\Chap8_Trop\bin\Debug\Chap8_Trop.pdb
+D:\Csharp代码库\测绘程序设计\Chap8_Trop\Trop\Chap8_Trop\obj\Debug\Chap8_Trop.csprojAssemblyReference.cache
+D:\Csharp代码库\测绘程序设计\Chap8_Trop\Trop\Chap8_Trop\obj\Debug\Trop.Form1.resources
+D:\Csharp代码库\测绘程序设计\Chap8_Trop\Trop\Chap8_Trop\obj\Debug\Trop.Properties.Resources.resources
+D:\Csharp代码库\测绘程序设计\Chap8_Trop\Trop\Chap8_Trop\obj\Debug\Chap8_Trop.csproj.GenerateResource.cache
+D:\Csharp代码库\测绘程序设计\Chap8_Trop\Trop\Chap8_Trop\obj\Debug\Chap8_Trop.csproj.CoreCompileInputs.cache
+D:\Csharp代码库\测绘程序设计\Chap8_Trop\Trop\Chap8_Trop\obj\Debug\Chap8_Trop.exe
+D:\Csharp代码库\测绘程序设计\Chap8_Trop\Trop\Chap8_Trop\obj\Debug\Chap8_Trop.pdb
