@@ -112,6 +112,10 @@ http://localhost:8080/geoserver/tiger/wms?service=WMS&version=1.1.0&request=GetF
 
 GetFeatureInfo一般可以用于空间查询
 
+------
+
+
+
 #### **GetCapabilities**: 获取WMS服务的元数据，包括可用图层、投影和样式。
 
 `GetCapabilities` 操作的主要目的是获取服务元数据。这些元数据提供了服务器所包含信息的描述以及可接受的请求参数值。这些描述既是机器可读的，也可以供人类阅读。通过 `GetCapabilities` 请求，客户端可以了解服务器支持的服务类型、可用的图层、数据格式、坐标参考系统（CRS）以及其他关键信息。
@@ -156,8 +160,142 @@ WCS允许访问多维栅格数据（如卫星影像、气象数据）。虽然WC
 
 WFS允许客户端访问和操作矢量数据。虽然WFS主要用于数据的查询和编辑，但它可以与SLD结合使用，以支持矢量数据的样式化和可视化。
 
-- **GetFeature**: 获取矢量数据的特定子集。
-- **Transaction**: 执行数据的插入、更新、删除操作。
+#### **基本请求操作**
+
+这些是所有 WFS 实现必须支持的核心操作。
+
+##### **GetCapabilities**
+
+- 描述：请求 WFS 服务的能力文档，返回服务的元数据，包括支持的操作、可用的图层、坐标参考系统等。
+- 典型用途：客户端获取有关服务的详细信息以确定其功能。
+
+例如在Geoserver格式如下：
+
+```html
+http://localhost:8080/geoserver/ows?service=WFS&acceptversions=2.0.0&request=GetCapabilities
+```
+
+`GetCapabilities` 操作是与 WFS 服务（以及其他 OGC 服务）交互的第一步。它提供了**服务的全面信息**，使客户端能够了解服务的功能、可用数据和如何与服务进行交互。通过这个请求，客户端可以根据需要选择合适的要素类型、操作、格式和空间参考系统，从而进行更深入的数据请求和处理。
+
+
+
+跟WMF的GetCapabilities类似，从Geoserver返回的结果得知，WFS支持的操作（operation）如下：
+
+![72370417438](readme.assets/1723704174387.png)
+
+完美的符合OGC文档里面要求的服务
+
+![72370424493](readme.assets/1723704244938.png)
+
+------
+
+
+
+##### **DescribeFeatureType**
+
+- 描述：请求描述特定图层的要素类型结构，返回关于要素的属性和数据类型的信息（通常为 XML Schema）。
+- 典型用途：客户端了解要素数据的结构，以便正确解析和使用数据。
+
+例如Geoserver里：
+
+```html
+http://localhost:8080/geoserver/tiger/wfs?service=WFS&version=1.0.0&request=DescribeFeatureType&typeName=tiger:HuNanProvince
+```
+
+符合官方文档里给出的Request格式
+
+![72370363920](readme.assets/1723703639202.png)
+
+`DescribeFeatureType` 请求通常返回一个 XML 或 JSON 文档，描述要素的属性及其数据类型。
+
+------
+
+
+
+##### **GetFeature**
+
+- 描述：请求获取特定图层中的地理要素。可以通过属性、空间过滤器等进行筛选。
+- 典型用途：客户端获取实际的矢量数据（如点、线、面等）。
+
+例如Geoserver里，查询某个图层的所有要素：
+
+```html
+http://localhost:8080/geoserver/tiger/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=tiger:HuNanProvince&outputFormat=application/json
+```
+
+得到的 JSON 格式，显示后跟原图层相同![72370523124](readme.assets/1723705231244.png)
+
+------
+
+
+
+#### **事务操作（Transactional WFS，WFS-T）**
+
+这些操作允许客户端对地理要素数据进行创建、修改和删除操作。WFS-T 操作是可选的，不是所有 WFS 实现都支持。
+
+##### **Transaction**
+
+- 描述：执行对地理要素的批量操作，包括插入、更新、删除操作。
+- 典型用途：客户端在服务器上创建、更新或删除地理要素。
+
+Transaction是发送一个XML，要发送包含 `Transaction` 操作的请求体，你需要使用 HTTP POST 方法，并将 XML 数据作为请求体发送。具体的暂时不清楚，这块不了解。
+
+##### **LockFeature**
+
+- 描述：请求锁定特定的地理要素，以防止其他客户端同时修改该要素。
+- 典型用途：在长时间事务中确保数据一致性，防止并发冲突。
+
+同Transaction，发送请求体是一个XML。
+
+------
+
+
+
+#### **筛选和排序**
+
+WFS 提供的请求通常支持丰富的过滤和排序功能，允许用户精确地选择和排序返回的地理要素。
+
+**Filter**
+
+- 描述：通过属性条件、空间条件（如点在多边形内）等筛选要素。
+- 典型用途：根据条件过滤返回的地理要素，如选择特定区域内的所有要素。
+
+**SortBy**
+
+- 描述：对返回的要素结果进行排序。
+- 典型用途：按属性（如名称、ID）对结果排序。
+
+------
+
+
+
+#### 其他扩展操作
+
+根据 WFS 的版本和实现，可能还支持其他扩展操作。例如：
+
+**GetPropertyValue**
+
+- 描述：请求返回特定属性的值，而不是整个要素。这对于需要从大量数据中提取特定属性时非常有用。
+- 典型用途：客户端仅获取某个属性的值，而不是整个要素数据。
+
+**DescribeStoredQueries**
+
+- 描述：请求描述 WFS 服务中存储的查询的结构和参数。
+- 典型用途：客户端了解和执行服务中预定义的查询。
+
+**ListStoredQueries**
+
+- 描述：请求列出 WFS 服务中存储的查询。
+- 典型用途：客户端获取服务支持的所有存储查询的列表。
+
+**CreateStoredQuery / DropStoredQuery**
+
+- 描述：在 WFS 服务上创建或删除存储查询。这些查询可以由客户端定义，并存储在服务器上供以后使用。
+- 典型用途：客户端定义复杂的查询并在服务器上保存，以便其他用户或客户端调用。
+
+------
+
+
 
 ### 7. **KML（Keyhole Markup Language）**
 
