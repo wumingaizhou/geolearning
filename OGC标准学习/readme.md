@@ -132,8 +132,77 @@ http://localhost:8080/geoserver/ows?service=WMS&version=1.3.0&request=GetCapabil
 
 WMTS是WMS的扩展，提供预渲染的地图瓦片（tile），以提高地图加载速度和性能。WMTS通常用于大规模的地图服务，例如网络地图应用。
 
-- **TileMatrixSet**: 定义不同缩放级别的瓦片矩阵。
-- **GetTile**: 请求特定瓦片的图像。
+#####  **GetCapabilities**
+
+- **功能**：获取WMTS服务的元数据，包括支持的图层、样式、切片矩阵集、可用的坐标系、格式等信息。
+
+- 请求示例
+
+  ```html
+  http://localhost:8080/geoserver/gwc/service/wmts？service=WMTS&version=1.1.1&request=GetCapabilities
+  ```
+
+![72379872441](readme.assets/1723798724410.png)![72379878855](readme.assets/1723798788557.png)
+
+
+
+------
+
+
+
+##### **GetTile**
+
+> 在此之前，请你先补充**瓦片**的知识，在文档的最下面（补充知识）
+>
+> ！！！
+
+- **功能**：请求特定的地图切片。用户需要指定图层、样式、切片矩阵集、切片矩阵、行列、格式等参数，以获取具体的地图切片。
+
+- 请求示例
+
+  ```html
+  http://localhost:8080/geoserver/gwc/service/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=tiger:HuNanProvinceMap&STYLE=default&TILEMATRIXSET=EPSG:4326&TILEMATRIX=EPSG:4326:0&TILEROW=0&TILECOL=1&FORMAT=image/png
+  ```
+
+![72379908321](readme.assets/1723799083212.png)
+
+![72379910702](readme.assets/1723799107025.png)
+
+从GetCapabilities里可以得知你可以切片的图层，从结果来看只能切**图层组**的片，图层不行![72380151639](readme.assets/1723801516391.png)
+
+
+
+Format格式不用说，重点说说下面的，`TileMatrixSet`指的是切片的**瓦片矩阵集**，下面的`TileMatrixLimits`限定了每个层级下有效瓦片的最小和最大行、列范围。例如图中的 EPSG:4326:0，里面的 0 指的是瓦片的层级，0 的时候相当于地图缩小到最小，这个时候只需要1个瓦片就行了，这也是为什么 MinTileRow 和 MinTileCol 很小。
+
+![72380166592](readme.assets/1723801665923.png)
+
+但瓦片的层级很大时，瓦片的数量就很多，这是显而易见的![72380203635](readme.assets/1723802036354.png)
+
+**为什么不从 0 开始？**
+
+在瓦片地图系统中，行（Row）和列（Col）的编号通常是从 0 开始的，尤其是在 Web 地图瓦片标准中（如 Google Maps、OpenStreetMap 等）。然而，在某些特定的瓦片服务或坐标系统中，瓦片编号的范围可能会根据地理范围、投影方式或 TileMatrixSet 的定义而有所不同。这可能导致行和列的编号并非从 0 开始。
+
+------
+
+
+
+##### GetFeatureInfo(可选)
+
+- **功能**：获取关于指定地图位置的特定信息，类似于WMS的GetFeatureInfo请求。这个服务在WMTS中是可选的，具体支持与否取决于服务实现。
+
+- 请求示例
+
+  ```html
+  http://localhost:8080/geoserver/gwc/service/wmts?SERVICE=WMTS&VERSION=1.0.0&REQUEST=GetFeatureInfo&LAYER=tiger:HuNanProvinceMap&STYLE=default&TILEMATRIXSET=EPSG:4326&TILEMATRIX=EPSG:4326:21&TILEROW=730000&TILECOL=3400000&FORMAT=image/png&INFOFORMAT=application/json&I=128&J=128&WIDTH=256&HEIGHT=256
+  ```
+
+![72380219261](readme.assets/1723802192618.png)
+
+例如我请求到 JSON 的数据可视化后，是一个面数据![72380959967](readme.assets/1723809599672.png)
+
+------
+
+
 
 ### 3. **SLD（Styled Layer Descriptor）**
 
@@ -352,3 +421,48 @@ OGC也致力于3D地理信息的可视化标准化，包括：
 | `    | `       | `%7C`            |
 | `}`  | `%7D`   | 右花括号         |
 | `~`  | `%7E`   | 波浪号           |
+
+### 瓦片
+
+瓦片地图是将大范围的地图数据分割成多个小的正方形图块（瓦片），然后根据用户的需求动态加载对应的图块以展示地图。这样可以减少数据传输量，提高地图加载速度。以下是瓦片地图的一些关键知识点：
+
+**瓦片的基本概念**
+
+- **瓦片（Tile）**：地图分成的小正方形图块，每个瓦片表示地图的一小部分。
+- **瓦片坐标**：瓦片通过行（Row）和列（Col）来进行编号。行表示垂直方向的瓦片编号，列表示水平方向的编号。通常编号从 0 开始。
+- **瓦片层级（Zoom Level）**：表示地图的放大级别，层级越大，地图放得越细，所需的瓦片数量也越多。
+
+**瓦片坐标系**
+
+- **EPSG:4326（WGS 84）**：地理坐标系，使用经纬度表示地理位置。瓦片在不同的缩放级别下表示不同的地理范围。
+- **EPSG:3857（Web Mercator 或 EPSG:900913）**：常用的投影坐标系，适用于 Web 地图。此投影会将地球投影为一个正方形，适合于在线地图应用。
+
+**瓦片的层级（Zoom Level）**
+
+- 层级表示地图的缩放级别。层级越高，地图越详细，每个瓦片覆盖的地理范围越小，瓦片的数量越多。
+- **Zoom Level 0**：整个地球在一个瓦片中表示。
+- **Zoom Level N**：地图的瓦片数量为 2N×2N2^N \times 2^N2N×2N。
+
+**瓦片矩阵集（TileMatrixSet）**
+
+- **TileMatrixSet** 定义了不同缩放级别下瓦片的排列和范围。
+- **TileMatrixLimits**：限定了每个层级下有效瓦片的最小和最大行、列范围。
+
+**瓦片请求与显示**
+
+- **瓦片加载**：地图应用根据用户的视图范围和缩放级别，计算出需要的瓦片行列，然后从服务器请求这些瓦片。
+- **切片服务（Tile Service）**：提供瓦片的 Web 服务，常用的有 WMTS（Web Map Tile Service）。
+
+**瓦片的优点**
+
+- **性能优化**：仅加载用户当前视野内的瓦片，减少数据传输量。
+- **缓存友好**：瓦片可以被缓存，从而提高加载速度。
+- **动态加载**：随着用户的缩放和平移操作，瓦片动态加载，提供流畅的用户体验。
+
+**常见的问题**
+
+- **瓦片边缘拼接问题**：由于瓦片是独立加载的，可能在瓦片的边缘处出现拼接不完整的情况。
+- **坐标系不匹配**：不同瓦片服务可能使用不同的坐标系，需要转换以确保正确显示。
+
+瓦片地图技术在现代 Web 地图应用中被广泛使用，极大地提升了地图加载效率和用户体验。
+
