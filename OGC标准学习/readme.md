@@ -204,21 +204,7 @@ Format格式不用说，重点说说下面的，`TileMatrixSet`指的是切片�
 
 
 
-### 3. **SLD（Styled Layer Descriptor）**
-
-SLD是一个OGC标准，定义了如何在WMS服务中对地理空间数据进行样式化。SLD允许用户自定义地图的显示样式，包括颜色、线条样式、标记等。
-
-- **UserStyle**: 用户定义的样式，用于覆盖默认样式。
-- **NamedLayer**: 关联样式和WMS图层。
-
-### 4. **SE（Symbology Encoding）**
-
-SE是一个XML编码规范，用于描述地图中地理数据的符号化规则。它通常与SLD结合使用，定义如何在地图中渲染点、线、面等几何图形。
-
-- **FeatureTypeStyle**: 定义用于特定数据类型的样式规则。
-- **Rule**: 定义条件性样式应用规则，如按属性值进行样式化。
-
-### 5. **WCS（Web Coverage Service）**
+### 3. **WCS（Web Coverage Service）**
 
 WCS允许访问多维栅格数据（如卫星影像、气象数据）。虽然WCS主要用于数据下载和分析，但它也支持对栅格数据进行可视化，如生成覆盖图（coverage）。
 
@@ -303,7 +289,7 @@ WCS允许访问多维栅格数据（如卫星影像、气象数据）。虽然WC
 
 
 
-### 6. **WFS（Web Feature Service）**
+### 4. **WFS（Web Feature Service）**
 
 WFS允许客户端访问和操作矢量数据。虽然WFS主要用于数据的查询和编辑，但它可以与SLD结合使用，以支持矢量数据的样式化和可视化。
 
@@ -321,6 +307,8 @@ WFS允许客户端访问和操作矢量数据。虽然WFS主要用于数据的�
 ```html
 http://localhost:8080/geoserver/ows?service=WFS&acceptversions=2.0.0&request=GetCapabilities
 ```
+
+![72405010070](readme.assets/1724050100700.png)
 
 `GetCapabilities` 操作是与 WFS 服务（以及其他 OGC 服务）交互的第一步。它提供了**服务的全面信息**，使客户端能够了解服务的功能、可用数据和如何与服务进行交互。通过这个请求，客户端可以根据需要选择合适的要素类型、操作、格式和空间参考系统，从而进行更深入的数据请求和处理。
 
@@ -349,9 +337,7 @@ http://localhost:8080/geoserver/ows?service=WFS&acceptversions=2.0.0&request=Get
 http://localhost:8080/geoserver/tiger/wfs?service=WFS&version=1.0.0&request=DescribeFeatureType&typeName=tiger:HuNanProvince
 ```
 
-符合官方文档里给出的Request格式
-
-![72370363920](readme.assets/1723703639202.png)
+![72405015292](readme.assets/1724050152924.png)
 
 `DescribeFeatureType` 请求通常返回一个 XML 或 JSON 文档，描述要素的属性及其数据类型。
 
@@ -442,21 +428,6 @@ WFS 提供的请求通常支持丰富的过滤和排序功能，允许用户精�
 
 ------
 
-
-
-### 7. **KML（Keyhole Markup Language）**
-
-KML是一种用于描述地理数据可视化的XML格式。它最初由Google Earth开发，后被OGC采纳为标准。KML支持点、线、多边形等几何数据的渲染，并允许设置视图、注释、图标等可视化效果。
-
-- **Placemark**: 定义地理位置和相关信息。
-- **Style**: 定义几何体的外观（颜色、线条宽度等）。
-
-### 8. **3D Visualization Standards**
-
-OGC也致力于3D地理信息的可视化标准化，包括：
-
-- **CityGML**: 一种用于表示城市3D模型的标准。
-- **3D Tiles**: 用于传输大规模3D地理数据的规范，适用于3D城市、建筑、地形等可视化。
 
 
 
