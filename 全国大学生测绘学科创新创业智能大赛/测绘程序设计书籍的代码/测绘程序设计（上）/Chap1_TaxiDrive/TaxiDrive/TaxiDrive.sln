@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.34601.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiDrive", "TaxiDrive.csproj", "{FDF8CFBF-03EE-4202-9683-DC817773FDC9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDF8CFBF-03EE-4202-9683-DC817773FDC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDF8CFBF-03EE-4202-9683-DC817773FDC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDF8CFBF-03EE-4202-9683-DC817773FDC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDF8CFBF-03EE-4202-9683-DC817773FDC9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {72D27E5F-D87A-48F6-8ADE-667B4051DF13}
+	EndGlobalSection
+EndGlobal

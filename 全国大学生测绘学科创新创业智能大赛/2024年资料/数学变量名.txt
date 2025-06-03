@@ -1,0 +1,14 @@
+α (alpha) - alpha
+β (beta) - beta
+γ (gamma) - gamma
+δ (delta) - delta
+ε (epsilon) - epsilon
+η (eta) - eta
+λ (lambda) - lambda_val （由于 lambda 是 Python 的保留字）
+μ (mu) - mu
+ξ (xi) - xi
+σ (sigma) - sigma
+φ (phi) - phi
+ψ (psi) - psi
+ω (omega) - omega
+
