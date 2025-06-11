@@ -286,9 +286,19 @@ namespace SpaceResection
                         maxRow = k;
 
                 // 如果主元不在当前行，则交换当前行与主元所在行
+                //if (maxRow != i)
+                //    for (int j = 0; j < 2 * n; j++)
+                //        (aug[i, j], aug[maxRow, j]) = (aug[maxRow, j], aug[i, j]); // C# 7.0 元组交换语法
                 if (maxRow != i)
+                {
                     for (int j = 0; j < 2 * n; j++)
-                        (aug[i, j], aug[maxRow, j]) = (aug[maxRow, j], aug[i, j]); // C# 7.0 元组交换语法
+                    {
+                        double temp = aug[i, j];
+                        aug[i, j] = aug[maxRow, j];
+                        aug[maxRow, j] = temp;
+                    }
+                }
+
 
                 // 检查主元是否过小（接近于零），如果是，则矩阵奇异，不可逆
                 double div = aug[i, i];

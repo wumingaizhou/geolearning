@@ -265,12 +265,12 @@ namespace MapSheetDivision
                     // 行号计算公式: (100万图幅纬度跨度 / 当前比例尺纬差) - INT(点在100万图幅内的纬度偏移 / 当前比例尺纬差)
                     //   p.detaB 是点相对于1:100万图幅西南角的纬度偏移 (范围 0 到 4度)
                     //   行号从北向南编号，起始为1
-                    int new_row = (int)(Math.Floor(4.0 / detaB_scale_val)) - (int)(Math.Floor(p.detaB / detaB_scale_val));
+                    int new_row = (int)(4 / detaB_scale_val) - (int)((p.B % 4) / detaB_scale_val);
                     
                     // 列号计算公式: INT(点在100万图幅内的经度偏移 / 当前比例尺经差) + 1
                     //   p.detaL 是点相对于1:100万图幅西南角的经度偏移 (范围 0 到 6度)
                     //   列号从西向东编号，起始为1
-                    int new_col = (int)(Math.Floor(p.detaL / detaL_scale_val)) + 1;
+                    int new_col = (int)((p.L % 6) / detaL_scale_val) + 1;
 
                     // 组合新图幅编号: 1:100万图号 + 比例尺代码 + 3位行号 + 3位列号
                     p.newMapCode = $"{baseMapCode1M}{scaleLetterChar}{new_row:D3}{new_col:D3}";
@@ -308,7 +308,7 @@ namespace MapSheetDivision
                 case "1:1000000": case "1:100万":
                     detaL_scale_map = 6.0;
                     detaB_scale_map = 4.0;
-                    scaleLetter = 'A'; // 1:100万本身新图幅编号规则特殊，此代码主要为CalculateBesideMaps提供经纬差
+                    scaleLetter = 'A'; 
                     return true;
                 case "1:500000": case "1:50万":
                     detaL_scale_map = 3.0;
@@ -340,12 +340,6 @@ namespace MapSheetDivision
                     detaB_scale_map = 1.0 / 24.0; 
                     scaleLetter = 'G';
                     return true;
-                // 可根据需要添加更多比例尺，例如 1:5000
-                // case "1:5000":
-                //     detaL_scale_map = 0.025;        // 经差1分30秒
-                //     detaB_scale_map = 1.0 / 60.0;   // 纬差1分
-                //     scaleLetter = 'H';
-                //     return true;
                 default:
                     return false;
             }
@@ -406,7 +400,7 @@ namespace MapSheetDivision
             }
         }
 
-       
+        
         /// <summary>
         /// 根据1:100万图幅的行号获取对应的字母。
         /// 行号从1开始，对应字母A到V。

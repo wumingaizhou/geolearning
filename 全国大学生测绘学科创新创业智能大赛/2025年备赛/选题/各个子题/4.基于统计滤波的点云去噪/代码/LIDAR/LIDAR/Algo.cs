@@ -127,6 +127,7 @@ namespace LIDAR
 
         public List<Point> Setp3_RemovePoint()
         {
+
             //步骤三：计算统计量；去除噪声点
             //首先计算统计量
             double d_mean = AlgoPoints

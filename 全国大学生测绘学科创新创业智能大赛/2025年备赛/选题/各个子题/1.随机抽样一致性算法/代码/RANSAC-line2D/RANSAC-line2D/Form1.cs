@@ -23,18 +23,19 @@ namespace RANSAC_line2D
         {
             try
             {
+
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 openFileDialog.FileName = "数据-2D";
                 openFileDialog.Filter = "文本数据|*.txt";
-                if(openFileDialog.ShowDialog() == DialogResult.OK)
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     points.Clear(); //重复添加数据时，需要清除原有数据
                     var reader = new StreamReader(openFileDialog.FileName);
                     reader.ReadLine(); //第一行不需要
-                    while(!reader.EndOfStream)
+                    while (!reader.EndOfStream)
                     {
                         var line = reader.ReadLine();
-                        if(line.Length > 0)
+                        if (line.Length > 0)
                         {
                             var tempPoint = new Point(line);
                             points.Add(tempPoint);
