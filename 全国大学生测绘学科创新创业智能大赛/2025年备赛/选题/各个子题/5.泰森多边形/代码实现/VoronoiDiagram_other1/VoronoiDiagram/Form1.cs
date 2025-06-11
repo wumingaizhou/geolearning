@@ -29,7 +29,7 @@ namespace VoronoiDiagram
 
         Algo algo = new Algo();
 
-  
+
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             try
@@ -37,7 +37,7 @@ namespace VoronoiDiagram
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 openFileDialog.FileName = "请选择数据";
                 openFileDialog.Filter = "文本文件|*.txt";
-                if(openFileDialog.ShowDialog() == DialogResult.OK)
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     Points.Clear(); // 先去除原本的数据
 
@@ -45,19 +45,19 @@ namespace VoronoiDiagram
                     reader.ReadLine();
                     reader.ReadLine(); //第二行直接在上面就写了
                     reader.ReadLine();
-                    while(!reader.EndOfStream)
+                    while (!reader.EndOfStream)
                     {
                         var line = reader.ReadLine();
-                        if(line.Length > 0)
+                        if (line.Length > 0)
                         {
                             var pointtmp = new Point(line);
                             Points.Add(pointtmp);
-                        }         
+                        }
                     }
                     reader.Close();
 
                     dataGridView1.Rows.Clear();
-                    for(int i = 0;i < Points.Count;i++)
+                    for (int i = 0; i < Points.Count; i++)
                     {
                         dataGridView1.Rows.Add();
                         dataGridView1.Rows[i].Cells[0].Value = i + 1;
@@ -66,7 +66,7 @@ namespace VoronoiDiagram
                     }
                     toolStripStatusLabel1.Text = "状态：导入数据成功";
                     MessageBox.Show("导入成功");
-                    tabControl1.SelectedIndex = 0;               
+                    tabControl1.SelectedIndex = 0;
                 }
             }
             catch (Exception)
@@ -78,13 +78,12 @@ namespace VoronoiDiagram
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            if(Points.Count > 0)
+            if (Points.Count > 0)
             {
                 try
                 {
-                    // 执行 Voronoi 计算，传入点集和边界信息
-                    // 假设 algo.go 方法内部会调用 SetBoundingRectangle 来确定边界
-                    algo.go(Points, 0, 0, (int)pointRightBottom.X, (int)pointRightBottom.Y);
+                    // 执行 Voronoi 计算，使用新的简化方法
+                    algo.Calculate(Points);
 
                     // 调用绘图方法，将 Voronoi 图绘制到 PictureBox 的 Image 属性上
                     DrawVoronoi();
@@ -102,7 +101,6 @@ namespace VoronoiDiagram
                     // 最好记录详细错误日志
                     MessageBox.Show($"计算或绘图过程中发生错误: {ex.Message}");
                     toolStripStatusLabel1.Text = "状态：计算出错";
-                    // throw; // 避免直接抛出，除非上层需要处理
                 }
             }
             else
@@ -112,33 +110,42 @@ namespace VoronoiDiagram
             }
         }
 
-       
-
         /// <summary>
         /// 绘制Voronoi图（泰森多边形）到PictureBox控件
         /// </summary>
         private void DrawVoronoi()
         {
-            // 如果算法对象为空或者还未计算Voronoi图，则直接返回
             if (algo.VoronoiCells.Count == 0) return;
 
-            // 创建位图对象
-            var bitMapWidth = (int)(pointRightBottom.X + 100);
-            var bitMapHeight = (int)(pointRightBottom.Y + 100);
-            Bitmap bitmap = new Bitmap(bitMapWidth, bitMapHeight);
+            // 计算绘图区域大小
+            double minX = Points.Min(p => p.X) - 50;
+            double maxX = Points.Max(p => p.X) + 50;
+            double minY = Points.Min(p => p.Y) - 50;
+            double maxY = Points.Max(p => p.Y) + 50;
+
+            int width = Math.Max(600, (int)(maxX - minX));
+            int height = Math.Max(600, (int)(maxY - minY));
+
+            // 创建位图
+            Bitmap bitmap = new Bitmap(width, height);
             using (Graphics g = Graphics.FromImage(bitmap))
             {
-                // 设置抗锯齿，使绘制的线条更平滑，可以不考虑。从简
+                // 设置抗锯齿
                 g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-                // 调用算法类的绘图方法，传入Graphics对象
+                // 设置坐标变换，使绘图区域居中
+                g.TranslateTransform((float)(width / 2 - (maxX + minX) / 2),
+                                   (float)(height / 2 - (maxY + minY) / 2));
+
+                // 调用算法类的绘图方法
                 algo.DrawVoronoiDiagram(g);
             }
 
-            // 将绘制好的位图显示到PictureBox控件
-            pictureBox1.Image?.Dispose();  // 释放之前的图像资源，避免内存泄漏
-            pictureBox1.Image = bitmap;  // 设置新的图像
+            // 释放之前的图像并设置新图像
+            pictureBox1.Image?.Dispose();
+            pictureBox1.Image = bitmap;
         }
+
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
