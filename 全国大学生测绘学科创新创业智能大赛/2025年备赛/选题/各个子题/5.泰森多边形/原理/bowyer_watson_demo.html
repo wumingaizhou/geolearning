@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bowyer-Watson算法演示</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .step {
+            margin: 20px 0;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        .step h3 {
+            color: #333;
+            margin-top: 0;
+        }
+        .canvas-container {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        canvas {
+            border: 2px solid #333;
+            background: white;
+            border-radius: 5px;
+        }
+        .controls {
+            margin: 20px 0;
+            text-align: center;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .explanation {
+            background: #e8f4f8;
+            padding: 15px;
+            border-left: 4px solid #007bff;
+            margin: 10px 0;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bowyer-Watson算法详解</h1>
+        
+        <div class="explanation">
+            <h3>算法步骤简述：</h3>
+            <ol>
+                <li><strong>初始化</strong>：创建一个巨大的三角形包含所有点</li>
+                <li><strong>逐点插入</strong>：每次加入一个新点</li>
+                <li><strong>找坏三角形</strong>：找到外接圆包含新点的三角形</li>
+                <li><strong>删除坏三角形</strong>：把这些三角形删掉</li>
+                <li><strong>重新连接</strong>：用新点连接空洞的边界</li>
+                <li><strong>清理</strong>：最后删除初始的大三角形</li>
+            </ol>
+        </div>
+
+        <div class="controls">
+            <button onclick="startDemo()">开始演示</button>
+            <button onclick="nextStep()" id="nextBtn" disabled>下一步</button>
+            <button onclick="reset()">重置</button>
+        </div>
+
+        <div class="canvas-container">
+            <div>
+                <h3>当前状态</h3>
+                <canvas id="canvas" width="400" height="300"></canvas>
+            </div>
+            <div>
+                <h3>算法说明</h3>
+                <div id="explanation" style="width: 400px; height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
+                    点击"开始演示"来查看算法步骤
+                </div>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>C#代码框架：</h3>
+            <div class="code-block">
+public class BowyerWatson
+{
+    public List&lt;Triangle&gt; Triangulate(List&lt;Point&gt; points)
+    {
+        // 步骤1: 创建超级三角形
+        var superTriangle = CreateSuperTriangle(points);
+        var triangles = new List&lt;Triangle&gt; { superTriangle };
+        
+        // 步骤2: 逐点插入
+        foreach (var point in points)
+        {
+            // 找到"坏"三角形（外接圆包含新点的三角形）
+            var badTriangles = new List&lt;Triangle&gt;();
+            foreach (var triangle in triangles)
+            {
+                if (IsPointInCircumcircle(point, triangle))
+                {
+                    badTriangles.Add(triangle);
+                }
+            }
+            
+            // 找到多边形边界（坏三角形围成的空洞边界）
+            var polygon = FindPolygonBoundary(badTriangles);
+            
+            // 删除坏三角形
+            foreach (var badTriangle in badTriangles)
+            {
+                triangles.Remove(badTriangle);
+            }
+            
+            // 用新点连接多边形边界，形成新三角形
+            foreach (var edge in polygon)
+            {
+                var newTriangle = new Triangle(point, edge.P1, edge.P2);
+                triangles.Add(newTriangle);
+            }
+        }
+        
+        // 步骤3: 删除包含超级三角形顶点的三角形
+        return RemoveSuperTriangles(triangles, superTriangle);
+    }
+}
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>关键函数详解：</h3>
+            <div class="code-block">
+// 判断点是否在三角形的外接圆内
+private bool IsPointInCircumcircle(Point point, Triangle triangle)
+{
+    var circumcenter = triangle.GetCircumcenter();
+    var radius = Distance(circumcenter, triangle.A);
+    var distanceToPoint = Distance(circumcenter, point);
+    
+    return distanceToPoint &lt; radius; // 距离小于半径就在圆内
+}
+
+// 找到多边形边界（这是最复杂的部分）
+private List&lt;Edge&gt; FindPolygonBoundary(List&lt;Triangle&gt; badTriangles)
+{
+    var edges = new List&lt;Edge&gt;();
+    
+    // 收集所有坏三角形的边
+    foreach (var triangle in badTriangles)
+    {
+        edges.Add(new Edge(triangle.A, triangle.B));
+        edges.Add(new Edge(triangle.B, triangle.C));
+        edges.Add(new Edge(triangle.C, triangle.A));
+    }
+    
+    // 只保留出现奇数次的边（边界边）
+    var boundary = new List&lt;Edge&gt;();
+    foreach (var edge in edges)
+    {
+        int count = edges.Count(e => e.Equals(edge) || e.Equals(edge.Reverse()));
+        if (count == 1) // 只出现一次的边就是边界
+        {
+            boundary.Add(edge);
+        }
+    }
+    
+    return boundary;
+}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const explanationDiv = document.getElementById('explanation');
+        
+        let currentStep = 0;
+        let points = [];
+        let triangles = [];
+        let superTriangle = null;
+        let isRunning = false;
+        
+        // 预设的演示点
+        const demoPoints = [
+            {x: 150, y: 100},
+            {x: 250, y: 80},
+            {x: 200, y: 150},
+            {x: 300, y: 200},
+            {x: 100, y: 200}
+        ];
+        
+        function startDemo() {
+            reset();
+            isRunning = true;
+            document.getElementById('nextBtn').disabled = false;
+            
+            // 初始化点
+            points = [...demoPoints];
+            
+            // 创建超级三角形
+            superTriangle = {
+                A: {x: -100, y: -100},
+                B: {x: 500, y: -100},
+                C: {x: 200, y: 400}
+            };
+            
+            triangles = [superTriangle];
+            currentStep = 0;
+            
+            updateExplanation("演示开始！创建了一个巨大的超级三角形包含所有点。");
+            draw();
+        }
+        
+        function nextStep() {
+            if (!isRunning || currentStep >= points.length) {
+                if (currentStep === points.length) {
+                    // 清理步骤
+                    triangles = triangles.filter(t => 
+                        !containsSuperTriangleVertex(t, superTriangle));
+                    updateExplanation("最后一步：删除包含超级三角形顶点的三角形。算法完成！");
+                    currentStep++;
+                    draw();
+                }
+                return;
+            }
+            
+            const newPoint = points[currentStep];
+            insertPoint(newPoint);
+            currentStep++;
+            
+            if (currentStep >= points.length) {
+                updateExplanation(`所有点都已插入。下一步将清理超级三角形。`);
+            }
+            
+            draw();
+        }
+        
+        function insertPoint(point) {
+            // 找到坏三角形
+            const badTriangles = triangles.filter(t => 
+                isPointInCircumcircle(point, t));
+            
+            // 找到边界
+            const boundary = findPolygonBoundary(badTriangles);
+            
+            // 删除坏三角形
+            triangles = triangles.filter(t => !badTriangles.includes(t));
+            
+            // 创建新三角形
+            boundary.forEach(edge => {
+                triangles.push({
+                    A: point,
+                    B: edge.p1,
+                    C: edge.p2
+                });
+            });
+            
+            updateExplanation(`插入点(${point.x}, ${point.y})：
+            1. 找到${badTriangles.length}个坏三角形
+            2. 找到${boundary.length}条边界边
+            3. 删除坏三角形，创建${boundary.length}个新三角形`);
+        }
+        
+        function isPointInCircumcircle(point, triangle) {
+            const circumcenter = getCircumcenter(triangle);
+            const radius = distance(circumcenter, triangle.A);
+            const distToPoint = distance(circumcenter, point);
+            
+            return distToPoint < radius - 1; // 减1避免数值误差
+        }
+        
+        function getCircumcenter(triangle) {
+            const ax = triangle.A.x, ay = triangle.A.y;
+            const bx = triangle.B.x, by = triangle.B.y;
+            const cx = triangle.C.x, cy = triangle.C.y;
+            
+            const area = 2 * (ax * (by - cy) + bx * (cy - ay) + cx * (ay - by));
+            if (Math.abs(area) < 0.001) return {x: 0, y: 0}; // 避免除零
+            
+            const dx = (ax*ax + ay*ay) * (by - cy) + 
+                       (bx*bx + by*by) * (cy - ay) + 
+                       (cx*cx + cy*cy) * (ay - by);
+            
+            const dy = (ax*ax + ay*ay) * (cx - bx) + 
+                       (bx*bx + by*by) * (ax - cx) + 
+                       (cx*cx + cy*cy) * (bx - ax);
+            
+            return {x: dx / area, y: dy / area};
+        }
+        
+        function distance(p1, p2) {
+            return Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2);
+        }
+        
+        function findPolygonBoundary(badTriangles) {
+            const edges = [];
+            
+            // 收集所有边
+            badTriangles.forEach(triangle => {
+                edges.push({p1: triangle.A, p2: triangle.B});
+                edges.push({p1: triangle.B, p2: triangle.C});
+                edges.push({p1: triangle.C, p2: triangle.A});
+            });
+            
+            // 找到只出现一次的边
+            const boundary = [];
+            edges.forEach(edge => {
+                const count = edges.filter(e => 
+                    (e.p1.x === edge.p1.x && e.p1.y === edge.p1.y && 
+                     e.p2.x === edge.p2.x && e.p2.y === edge.p2.y) ||
+                    (e.p1.x === edge.p2.x && e.p1.y === edge.p2.y && 
+                     e.p2.x === edge.p1.x && e.p2.y === edge.p1.y)
+                ).length;
+                
+                if (count === 1) {
+                    boundary.push(edge);
+                }
+            });
+            
+            return boundary;
+        }
+        
+        function containsSuperTriangleVertex(triangle, superTriangle) {
+            return [triangle.A, triangle.B, triangle.C].some(vertex =>
+                vertex.x === superTriangle.A.x && vertex.y === superTriangle.A.y ||
+                vertex.x === superTriangle.B.x && vertex.y === superTriangle.B.y ||
+                vertex.x === superTriangle.C.x && vertex.y === superTriangle.C.y
+            );
+        }
+        
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // 绘制三角形
+            triangles.forEach(triangle => {
+                ctx.beginPath();
+                ctx.moveTo(triangle.A.x, triangle.A.y);
+                ctx.lineTo(triangle.B.x, triangle.B.y);
+                ctx.lineTo(triangle.C.x, triangle.C.y);
+                ctx.closePath();
+                
+                // 超级三角形用虚线
+                if (triangle === superTriangle) {
+                    ctx.setLineDash([5, 5]);
+                    ctx.strokeStyle = '#ccc';
+                } else {
+                    ctx.setLineDash([]);
+                    ctx.strokeStyle = '#007bff';
+                }
+                ctx.stroke();
+            });
+            
+            // 绘制已插入的点
+            for (let i = 0; i < currentStep && i < points.length; i++) {
+                const point = points[i];
+                ctx.beginPath();
+                ctx.arc(point.x, point.y, 4, 0, 2 * Math.PI);
+                ctx.fillStyle = '#dc3545';
+                ctx.fill();
+            }
+            
+            // 绘制待插入的点
+            for (let i = currentStep; i < points.length; i++) {
+                const point = points[i];
+                ctx.beginPath();
+                ctx.arc(point.x, point.y, 3, 0, 2 * Math.PI);
+                ctx.fillStyle = '#6c757d';
+                ctx.fill();
+            }
+            
+            // 高亮当前要插入的点
+            if (currentStep < points.length) {
+                const point = points[currentStep];
+                ctx.beginPath();
+                ctx.arc(point.x, point.y, 6, 0, 2 * Math.PI);
+                ctx.strokeStyle = '#28a745';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.lineWidth = 1;
+            }
+        }
+        
+        function updateExplanation(text) {
+            explanationDiv.innerHTML = `<p><strong>步骤 ${currentStep + 1}:</strong> ${text}</p>`;
+        }
+        
+        function reset() {
+            currentStep = 0;
+            points = [];
+            triangles = [];
+            superTriangle = null;
+            isRunning = false;
+            document.getElementById('nextBtn').disabled = true;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            explanationDiv.innerHTML = '点击"开始演示"来查看算法步骤';
+        }
+    </script>
+</body>
+</html>

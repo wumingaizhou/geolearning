@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.35714.111
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoronoiDiagram", "VoronoiDiagram\VoronoiDiagram.csproj", "{51C86995-0925-49BA-8FB4-57960BA212C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoronoiDiagram", "VoronoiDiagram\VoronoiDiagram.csproj", "{9FFD50DE-ACAE-4D6E-871E-F2A301C9C87B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{51C86995-0925-49BA-8FB4-57960BA212C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{51C86995-0925-49BA-8FB4-57960BA212C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{51C86995-0925-49BA-8FB4-57960BA212C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{51C86995-0925-49BA-8FB4-57960BA212C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FFD50DE-ACAE-4D6E-871E-F2A301C9C87B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FFD50DE-ACAE-4D6E-871E-F2A301C9C87B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FFD50DE-ACAE-4D6E-871E-F2A301C9C87B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FFD50DE-ACAE-4D6E-871E-F2A301C9C87B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {98CD9894-BC63-4C1C-B4C2-35ECD7B81551}
+		SolutionGuid = {C3C5028A-A547-4DEB-996E-D1907268938B}
 	EndGlobalSection
 EndGlobal
