@@ -101,7 +101,7 @@ namespace LIDAR
                             foreach(var point in tuplePoint)
                             {
                                 var deta = 1e-5; //用于判断点是不是其本身
-                                if (p.X - point.X < deta && p.Y - point.Y < deta && p.Z - point.Z < deta)
+                                if (Math.Abs(p.X - point.X) < deta && Math.Abs(p.Y - point.Y) < deta && Math.Abs(p.Z - point.Z) < deta)
                                 {
                                     // 如果是其本身
                                     continue;
