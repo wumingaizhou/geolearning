@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.35714.111
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RANSAC_line", "RANSAC_line\RANSAC_line.csproj", "{73C780A8-9684-466F-9A19-D9C221ADD6A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{73C780A8-9684-466F-9A19-D9C221ADD6A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73C780A8-9684-466F-9A19-D9C221ADD6A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73C780A8-9684-466F-9A19-D9C221ADD6A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73C780A8-9684-466F-9A19-D9C221ADD6A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D220F13D-432F-4129-8710-569CDC2FD481}
+	EndGlobalSection
+EndGlobal
